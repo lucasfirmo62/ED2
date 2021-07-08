@@ -14,12 +14,6 @@ void print(int* v, int n){
     
 }
 
-void deallocate(int* v, int n){
-    for(int i = 0; i < n; i++){
-        free(&v[i]);
-    }
-}
-
 int* random_vector(int n, int max, int seed){
 
     int* v = (int*) malloc(n * sizeof(int));
@@ -31,11 +25,23 @@ int* random_vector(int n, int max, int seed){
     return v;
 }
 
+int* vector(int n){
+
+    int* v = (int*) malloc(n * sizeof(int));
+
+    for(int i = 0; i < n; i++){
+        v[i] = i;
+    }
+
+    return v;
+
+}
+
 int main(){
 
-    int seed = 0;
-    int max = 10;
     int n = 100;
+    int seed = 42;
+    int max = 100*n;
 
     int* v;
 
@@ -46,10 +52,10 @@ int main(){
     clock_t t;
     quicksort(v, seed, n);
     t = clock() - t;
-    printf("\n%lu", t);
+    //printf("\n%f", ((double)t)/(CLOCKS_PER_SEC));
     printf("\nOrdenado\n");
     print(v, n);
-    
+
     int* v1;
 
     printf("\nQuickSort radomizado\n");
@@ -59,7 +65,7 @@ int main(){
     clock_t t1;
     quicksortRandon(v1, seed, n);
     t1 = clock() - t1;
-    printf("\n%lu", t1);
+    //printf("\n%f", ((double)t1)/(CLOCKS_PER_SEC));
     printf("\nOrdenado\n");
     print(v1, n);
 
@@ -72,7 +78,7 @@ int main(){
     clock_t t2;
     quicksortMedianThree(v2, seed, n);
     t2 = clock() - t2;
-    printf("\n%lu", t2);
+    //printf("\n%f", ((double)t2)/(CLOCKS_PER_SEC));
     printf("\nOrdenado\n");
     print(v2, n);
 
