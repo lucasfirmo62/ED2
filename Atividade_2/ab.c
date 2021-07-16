@@ -1,5 +1,8 @@
 #include "ab.h"
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
 
 AB* AB_Criar(int dado, AB* esq, AB* dir){
     AB* a;
@@ -13,13 +16,16 @@ AB* AB_Criar(int dado, AB* esq, AB* dir){
 }
 
 AB* AB_Busca(AB *A, int dado){
+
     if(A == NULL){
         return NULL;
     }else if(A->dado == dado){
         return A;
     }else if(dado < A->dado){
+        
         return AB_Busca(A->esq, dado);
     }else{
+        
         return AB_Busca(A->dir, dado);
     }
 }
@@ -48,6 +54,8 @@ void AB_Destruir(AB* A){
 
 void AB_imprimir(AB* A){
 
+    //char texto[100];
+
     if(A == NULL){
         return;
     }else{
@@ -55,34 +63,52 @@ void AB_imprimir(AB* A){
         if(A->dir != NULL){
             printf("%d\n\\", A->dado);
             printf("(d)");
+            //texto[] = "(d)";
+            //escritaTXT(texto);
             AB_imprimir(A->dir);
         }if(A->esq != NULL){
             printf("%d\n/", A->dado);
             printf("(e)");
+            //texto[A->txt++] = "(e)";
+            //escritaTXT(texto);
             AB_imprimir(A->esq);
         }
     }
 }
 
-void AB_remove(AB *A, int dado){
+void AB_remove(AB **A, int dado){
 
-    if(A->esq == NULL && A->dir == NULL){
-        
+    AB* no = AB_Busca(*A, dado);
+
+    if(no->esq == NULL && no->dir == NULL){
+        no->dado = NULL;
+        free(no);
     }else{
-        if(A->dir != NULL){
-            AB* folha = AB_Busca(A, dado);
-            folha = A->dir;
-            //printf("foi: %d\n", *A->dir);
-        }if(A->esq != NULL){
-            AB* folha = AB_Busca(A, dado);
-            folha = A->esq;
-            //printf("foi  esquerda: %d\n", *A->esq);
+        if((no->esq != NULL) && (no->dir == NULL)){
+            no->dado = no->esq->dado;
+            no->esq = NULL;
+            return;
+        }else if((no->esq == NULL) && (no->dir != NULL)){
+            no->dado = no->dir->dado;
+            no->dir = NULL;
+            return;
+        }else if((no->esq != NULL) && (no->dir != NULL)){
+
         }
-        //free(A);
+        free(no);
     }
 
     return;
 
+}
+
+void escritaTXT(char texto){
+    FILE *arquivo;
+
+    //char texto[] = "hello\n";
+
+    arquivo = fopen("resultado.txt", "w");
+    fprintf(arquivo, "%c", texto);
 }
 
 
