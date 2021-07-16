@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#define N 100
 
 
 AB* AB_Criar(int dado, AB* esq, AB* dir){
@@ -54,8 +55,6 @@ void AB_Destruir(AB* A){
 
 void AB_imprimir(AB* A){
 
-    //char texto[100];
-
     if(A == NULL){
         return;
     }else{
@@ -63,14 +62,10 @@ void AB_imprimir(AB* A){
         if(A->dir != NULL){
             printf("%d\n\\", A->dado);
             printf("(d)");
-            //texto[] = "(d)";
-            //escritaTXT(texto);
             AB_imprimir(A->dir);
         }if(A->esq != NULL){
             printf("%d\n/", A->dado);
             printf("(e)");
-            //texto[A->txt++] = "(e)";
-            //escritaTXT(texto);
             AB_imprimir(A->esq);
         }
     }
@@ -83,6 +78,7 @@ void AB_remove(AB **A, int dado){
     if(no->esq == NULL && no->dir == NULL){
         no->dado = NULL;
         free(no);
+        return;
     }else{
         if((no->esq != NULL) && (no->dir == NULL)){
             no->dado = no->esq->dado;
@@ -93,7 +89,9 @@ void AB_remove(AB **A, int dado){
             no->dir = NULL;
             return;
         }else if((no->esq != NULL) && (no->dir != NULL)){
-
+            no->dado = no->esq->dado;
+            no->esq->dado = NULL;
+            return;
         }
         free(no);
     }
@@ -101,14 +99,4 @@ void AB_remove(AB **A, int dado){
     return;
 
 }
-
-void escritaTXT(char texto){
-    FILE *arquivo;
-
-    //char texto[] = "hello\n";
-
-    arquivo = fopen("resultado.txt", "w");
-    fprintf(arquivo, "%c", texto);
-}
-
 

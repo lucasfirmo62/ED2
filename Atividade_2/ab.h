@@ -16,6 +16,5 @@ AB* AB_Busca(AB *A, int dado);
 void AB_inserir(AB **A, int dado);
 void AB_imprimir(AB *A);
 void AB_remove(AB **A, int dado);
-void escritaTXT(char texto);
 
 #endif
