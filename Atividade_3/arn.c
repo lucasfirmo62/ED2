@@ -1,4 +1,6 @@
 #include "arn.h"
+#define CLOCKS_PER_SEC 1000000
+#include <time.h>
 
 static ARN* ARN_Criar(int dado, int valor){
     ARN* a;
@@ -134,6 +136,8 @@ void destrutor(ARN* A){
 
 void ARN_Sort(int* v, int n){
 
+    clock_t t;
+
     int* count = 0;
 
     ARN *A = NULL;
@@ -142,18 +146,24 @@ void ARN_Sort(int* v, int n){
         return;
     }
 
-    print_vetor(v, n);
+    //print_vetor(v, n);
 
     for(int i = 0; i < n; i++){
         ARN_inserir(&A, v[i], 0);
     }
     
-    zerar_vetor(v, n);
-    print_vetor(v, n);
+    //zerar_vetor(v, n);
+    //print_vetor(v, n);
+
+    t = clock();
 
     ARN_Sort_R(A, v, &count);
 
-    print_vetor(v, n);
+    t = clock() - t;
+
+    printf("Tempo de execucao: %lf\n", ((double)t)/((CLOCKS_PER_SEC/100)));
+
+    //print_vetor(v, n);
 
     destrutor(A);
 

@@ -1,21 +1,30 @@
+
 #include <stdio.h>
 #include "ab.h"
 #include "arn.h"
-#define N 8
+#define N 500000
+
+void aleatorio(int* v, int n){
+    for(int i = 0; i < n; i++){
+        v[i] = rand() % N;
+    }
+}
 
 
 int main(){
 
-    printf("Teste ARN\n");
-
-    int v[] = {8,12,6,14,4,30,2,10};
-
-    ARN_Sort(v, N);
+    int vv[N];
 
     printf("\nTeste ABB\n");
 
-    int vv[] = {8,12,6,14,4,30,2,10};
-
     ABB_Sort(vv, N);
+
+    int v[N];
+
+    printf("Teste ARN\n");
+
+    aleatorio(v, N);
+
+    ARN_Sort(v, N);
 
 }

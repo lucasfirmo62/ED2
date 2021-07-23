@@ -24,7 +24,7 @@ static void inverter(ARN* A);
 static void rot_esq(ARN **A);
 static void rot_dir(ARN **A);
 void ARN_Sort(int* v, int n);
-void zerar_vetor(int* v, n);
+void zerar_vetor(int* v, int n);
 void ARN_Sort_R(ARN* A, int* v, int* count);
 void destrutor(ARN* A);
 void print_vetor(int* v, int n);
