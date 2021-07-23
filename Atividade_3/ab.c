@@ -1,4 +1,5 @@
 #include "ab.h"
+#include "arn.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -98,3 +99,56 @@ void AB_remove(AB **A, int dado){
 
 }
 
+void ABB_Sort_R(AB* A, int* v, int* count){
+    //printf("FOI\n");
+    if(A == NULL){
+        return;
+    }
+
+    if(*count >= 8){
+        return;
+    }
+
+    if(A->dado != NULL){
+        printf("%d\n", A->dado);
+    }
+
+    if(A->esq != NULL){
+        printf("%d\n", A->esq->dado);
+        *count += 1;
+        ABB_Sort_R(A->esq, v, count);
+    }
+
+    if(A->dir != NULL){
+        printf("%d\n", A->dir->dado);
+        *count += 1;
+        ABB_Sort_R(A->dir, v, count);
+    }
+
+}
+
+
+void ABB_Sort(int* v, int n){
+
+    int* count = 0;
+
+    AB* A = NULL;
+
+    if(n == 0){
+        return;
+    }
+
+    print_vetor(v, n);
+
+    for(int i = 0; i < n; i++){
+        AB_inserir(&A, v[i]);
+    }
+
+    zerar_vetor(v, n);
+    print_vetor(v, n);
+
+    ABB_Sort_R(A, v, &count);
+
+    destrutor(A);
+
+}

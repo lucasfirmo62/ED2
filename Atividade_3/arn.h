@@ -4,23 +4,15 @@
 
 
 typedef enum{
-	VERMELHA, PRETA
+	RUBRO, NEGRO
 } Cor;
 
-typedef struct aux{
-
-	int count;
-
-} AUX;
-
 typedef struct ARN{
-
 	struct ARN *esq;
 	struct ARN *dir;
 	int dado;
 	int valor;
 	Cor cor;
-
 }ARN;
 
 void ARN_imprimir(ARN *A);
@@ -31,4 +23,8 @@ static inline int vermelho(ARN *A);
 static void inverter(ARN* A);
 static void rot_esq(ARN **A);
 static void rot_dir(ARN **A);
-void ARN_Sort(ARN* A, int* v, int n, int count);
+void ARN_Sort(int* v, int n);
+void zerar_vetor(int* v, n);
+void ARN_Sort_R(ARN* A, int* v, int* count);
+void destrutor(ARN* A);
+void print_vetor(int* v, int n);

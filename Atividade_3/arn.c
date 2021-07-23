@@ -6,7 +6,7 @@ static ARN* ARN_Criar(int dado, int valor){
     a = malloc(sizeof(ARN));
     a->dado = dado;
     a->valor = valor;
-    a->cor = VERMELHA;
+    a->cor = RUBRO;
     a->esq = NULL;
     a->dir = NULL;
 
@@ -18,13 +18,13 @@ static inline int vermelho(ARN *A){
         return 0;
     }
 
-    return A->cor == VERMELHA ? 1 : 0;
+    return A->cor == RUBRO ? 1 : 0;
 }
 
 static void inverter(ARN* A){
-    A->cor = VERMELHA;
-    A->esq->cor = PRETA;
-    A->dir->cor = PRETA;
+    A->cor = RUBRO;
+    A->esq->cor = NEGRO;
+    A->dir->cor = NEGRO;
 }
 
 static void rot_esq(ARN **A){
@@ -34,7 +34,7 @@ static void rot_esq(ARN **A){
     h->dir = x->esq;
     x->esq = h;
     x->cor = h->cor;
-    h->cor = VERMELHA;
+    h->cor = RUBRO;
     *A = x;
 }
 
@@ -45,7 +45,7 @@ static void rot_dir(ARN **A){
     h->esq = x->dir;
     x->dir = h;
     x->cor = h->cor;
-    h->cor = VERMELHA;
+    h->cor = RUBRO;
     *A = x;
 }
 
@@ -79,24 +79,24 @@ void ARN_inserir_R(ARN **A, int dado, int valor){
 
 void ARN_inserir(ARN **A, int dado, int valor){
     ARN_inserir_R(A, dado, valor);
-    (*A)->cor = PRETA;
+    (*A)->cor = NEGRO;
 }
 
 void ARN_imprimir(ARN *A){
     printf("%d\n", A->dado);
     if(A->dir != NULL){
         printf("\\\n");
-        if((A->dir->cor) == VERMELHA){
+        if((A->dir->cor) == RUBRO){
             printf("%d(v)\n", A->dado);
-        }if((A->dir->cor) == PRETA){
+        }if((A->dir->cor) == NEGRO){
             printf("%d(p)\n", A->dado);
         }
         ARN_imprimir(A->dir);
     }if(A->esq != NULL){
         printf("/\n");
-        if((A->esq->cor) == VERMELHA){
+        if((A->esq->cor) == RUBRO){
             printf("%d(v)\n", A->dado);
-        }if((A->esq->cor) == PRETA){
+        }if((A->esq->cor) == NEGRO){
             printf("%d(p)\n", A->dado);
         }
         ARN_imprimir(A->esq);
@@ -104,25 +104,57 @@ void ARN_imprimir(ARN *A){
     printf("\n");
 }
 
-void ARN_Sort(ARN* A, int* v, int n, int count){
+void zerar_vetor(int* v, int n){
+    for (int i = 0; i < n; i++){
+        v[i] = 0;
+    }
+}
+
+void print_vetor(int* v, int n){
+    printf("v = [ ");
+    for (int i = 0; i < n; i++){
+        printf("%d ", v[i]);
+    }
+    printf("]\n");
+}
+
+void ARN_Sort_R(ARN* A, int* v, int* count){
+    if(A == NULL){
+        return;
+    }
+    ARN_Sort_R(A->esq ,v, count);
+    v[*count] = A->dado;
+    *count += 1;
+    ARN_Sort_R(A->dir, v, count);
+}
+
+void destrutor(ARN* A){
+    free(A);
+}
+
+void ARN_Sort(int* v, int n){
+
+    int* count = 0;
+
+    ARN *A = NULL;
 
     if(n == 0){
         return;
     }
-        int dado;
-        dado = v[count];
-        printf("valor de dado: %d\n", dado);
 
-        ARN_inserir(&A, dado, 0);
-        ARN_imprimir(A);
-        printf("valor de n: %d\n", n);
-        printf("valor de count: %d\n", count);
+    print_vetor(v, n);
 
-        n--;
-        count++;
-        ARN_Sort(A, v, n, count);
+    for(int i = 0; i < n; i++){
+        ARN_inserir(&A, v[i], 0);
+    }
+    
+    zerar_vetor(v, n);
+    print_vetor(v, n);
+
+    ARN_Sort_R(A, v, &count);
+
+    print_vetor(v, n);
+
+    destrutor(A);
 
 }
-
-
-
