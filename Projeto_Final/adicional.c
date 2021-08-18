@@ -2,8 +2,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include "arn.h"
-#define L 300000
-#define C 50
 
 ARN* arquivo(ARN *A){
 

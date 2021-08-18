@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "arn.h"
-#define L 1
-#define C 50
 
 int main(){
 

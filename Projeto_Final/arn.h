@@ -25,6 +25,5 @@ static inline int vermelho(ARN *A);
 static void inverter(ARN* A);
 static void rot_esq(ARN **A);
 static void rot_dir(ARN **A);
-ARN* ARN_Sort(ARN* A, char v[300000][50], int n);
 void destrutor(ARN* A);
 void buscar(ARN *A, char chave[50]);
