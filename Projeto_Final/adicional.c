@@ -5,7 +5,7 @@
 #define L 300000
 #define C 50
 
-void arquivo(char vet_string[L][C]){
+ARN* arquivo(ARN *A){
 
     FILE* arquivo;
 
@@ -16,7 +16,7 @@ void arquivo(char vet_string[L][C]){
     }
 
     int count = 0;
-    int v[100];
+    char* v = (char*) malloc(sizeof(char));
 
     int n_strings = 0;
     int n_coluna = 0;
@@ -30,13 +30,13 @@ void arquivo(char vet_string[L][C]){
         }
 
         if((c == '\n') || (c == EOF)){
-            for(int i = 0; i < count; i++){
-                vet_string[n_strings][i] = v[i];
-            }
+                ARN_inserir(&A, v);
 
             n_strings++;
             count = 0;
             n_coluna = 0;
+            free(v);
+            v = (char*) malloc(sizeof(char));
 
         }else{
             v[count] = c;
@@ -44,6 +44,8 @@ void arquivo(char vet_string[L][C]){
         }
 
     }while (c != EOF);
+
+    return A;
 
     fclose(arquivo);
 

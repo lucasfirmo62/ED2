@@ -86,7 +86,7 @@ static void ARN_inserir_R(ARN **A, char chave[50], char valor[50]){
 
 }
 
-static void ARN_inserir(ARN **A, char valor[50]){
+void ARN_inserir(ARN **A, char valor[50]){
 
     int count = strlen(valor);
     char chave[count];
