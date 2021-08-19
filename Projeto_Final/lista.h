@@ -22,7 +22,5 @@ typedef struct lista{
 Lista* criar();
 
 static No* criar_no(char palavra[50]);
-
 void inserir(Lista* l, char str[50]);
-
 void lista_imprimir(Lista* l);

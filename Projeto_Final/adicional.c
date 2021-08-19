@@ -15,9 +15,6 @@ ARN* arquivo(ARN *A){
 
     int count = 0;
     char* v = (char*) malloc(sizeof(char));
-
-    int n_strings = 0;
-    int n_coluna = 0;
     char c;
 
     do{
@@ -28,14 +25,11 @@ ARN* arquivo(ARN *A){
         }
 
         if((c == '\n') || (c == EOF)){
-                ARN_inserir(&A, v);
+            ARN_inserir(&A, v);
 
-            n_strings++;
             count = 0;
-            n_coluna = 0;
             free(v);
             v = (char*) malloc(sizeof(char));
-
         }else{
             v[count] = c;
             count++;
@@ -63,24 +57,19 @@ void bubble_sort(char palavra[50]){
     }
 }
 
-void recebe_palavra(ARN* A){
-
-    char palavra[50];
-
-    printf("Digite a palavra: ");
-    scanf("%s", palavra);
+void recebe_palavra(ARN* A, char palavra[50]){
 
     int count = strlen(palavra);
 
-    int chave[50];
+    for(int i = 0; i < count; i++){
+        if((palavra[i] > 64) && (palavra[i] < 91)){
+            palavra[i] += 32;
+        }
+    }
 
     bubble_sort(palavra);
 
-    printf("Chave a ser procurada: ");
-
-    for(int i = 0; i < count; i++){
-        printf("%c", palavra[i]);
-    }
+    printf("Chave a ser procurada é %s", palavra);
 
     printf("\n");
 

@@ -95,8 +95,8 @@ void ARN_inserir(ARN **A, char valor[50]){
 
     bubble_sort(chave);
 
-        ARN_inserir_R(A, chave, valor);
-        (*A)->cor = NEGRO;
+    ARN_inserir_R(A, chave, valor);
+    (*A)->cor = NEGRO;
 
 }
 
