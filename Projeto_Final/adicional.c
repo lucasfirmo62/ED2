@@ -71,7 +71,8 @@ void recebe_palavra(ARN* A, char palavra[50]){
 
     printf("Chave a ser procurada é %s", palavra);
 
+    buscar(A, palavra);
+
     printf("\n");
 
-    buscar(A, palavra);
 }

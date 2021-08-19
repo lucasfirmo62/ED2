@@ -9,8 +9,11 @@ int main(int argc, char *argv[]){
     printf("Inserindo...\n");
     A = arquivo(A);
     printf("Inserção completa.\n");
-    
-    recebe_palavra(A, argv[1]);
+
+    for(int i = 1; i < argc; i++){
+        recebe_palavra(A, argv[i]);
+    }
 
     destrutor(A);
+
 }
