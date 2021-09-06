@@ -1,0 +1,9 @@
+Instrunçoes para compilaçao e execuçao.
+
+1 - Dentro da pasta, Digite "make" para a compilaçao.
+	(Irá gerar os arquivos .o)
+
+2 - Para executar, você precisará inserir a main e os argumentos (argv), quantas palavras você desejar.
+	EX: "./main pizza Macarrao bAtAtA PASTEL Marte RomA"
+
+3 - Para remover os arquivos .o gerados, digite make remove.
